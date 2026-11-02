@@ -17,8 +17,8 @@ export const Home = ({ setActiveView }) => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="hero-shade absolute inset-0" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-28 md:py-28">
-          <div className="hero-copy max-w-3xl">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-28 md:py-12">
+          <div className="hero-copy max-w-4xl">
           <div className="hero-kicker"><span /> A slower kind of luxury <span /></div>
           <h1 className="text-6xl md:text-8xl text-white font-serif font-normal mb-6 leading-[0.98] tracking-tight">
             Where the sea<br /><em>sets the pace.</em>

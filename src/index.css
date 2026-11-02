@@ -153,13 +153,13 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 420px) {
   .resort-reserve-button { display: none; }
 }
-.home-hero { min-height: min(760px, calc(100svh - 82px)); background: #294d50; }
+.home-hero { height: min(660px, calc(100svh - 180px)); min-height: 540px; background: #294d50; }
 .home-hero > img { object-position: center 57%; }
 .hero-shade { background: linear-gradient(90deg, rgba(10,36,43,.76) 0%, rgba(10,36,43,.43) 48%, rgba(10,36,43,.06) 100%), linear-gradient(0deg, rgba(10,36,43,.5), transparent 35%); }
 .hero-copy { animation: hero-rise .9s cubic-bezier(.2,.7,.25,1) both; }
 .hero-kicker { display: flex; align-items: center; gap: .75rem; color: #f0d7ae; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.6rem; }
 .hero-kicker span { width: 26px; height: 1px; background: var(--color-brand); }
-.home-hero h1 { font-size: clamp(3.4rem, 8.3vw, 7.3rem); }
+.home-hero h1 { font-size: clamp(4rem, 6.7vw, 6rem); }
 .home-hero h1 em, .home-content em, .home-cta em { font-weight: 400; }
 .button-primary { background: #d9a85f; color: #17343a; border-radius: 2px; }
 .button-primary:hover { background: #edc98e; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.18); }
@@ -208,7 +208,7 @@ h1, h2, h3, h4, h5, h6 {
 .home-cta h2 { margin-top: .9rem; }
 @keyframes hero-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 767px) {
-  .home-hero { min-height: min(720px, calc(100svh - 72px)); }
+  .home-hero { height: auto; min-height: min(720px, calc(100svh - 72px)); }
   .home-hero h1 { font-size: clamp(2.75rem, 11.5vw, 3.3rem); }
   .hero-shade { background: linear-gradient(90deg, rgba(10,36,43,.75), rgba(10,36,43,.28)), linear-gradient(0deg, rgba(10,36,43,.55), transparent 55%); }
   .home-hero > div.relative { padding-top: 5.2rem; padding-bottom: 8rem; }
