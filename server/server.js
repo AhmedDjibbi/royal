@@ -50,12 +50,14 @@ app.use(helmet({
     }
   }
 }));
-app.use(cors({
-  origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error('Origin is not allowed by CORS.'));
-  }
-}));
+if (!process.env.VERCEL) {
+  app.use(cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error('Origin is not allowed by CORS.'));
+    }
+  }));
+}
 
 app.use(express.json({ limit: '32kb' }));
 app.use(express.urlencoded({ extended: true, limit: '32kb' }));
@@ -63,6 +65,61 @@ app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 180, standardHeader
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 12, standardHeaders: 'draft-8', legacyHeaders: false });
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
+
+let databaseReady;
+const initializeDatabase = () => {
+  if (!databaseReady) {
+    databaseReady = (async () => {
+      await connectDB();
+      await RoomNight.init();
+      // Long-running local/container servers backfill old reservations once at startup.
+      // Vercel instances instead rely on overlap queries for legacy records and unique night locks for new writes.
+      if (process.env.VERCEL) return;
+
+      const activeBookings = await Booking.find({ status: { $ne: 'Cancelled' } })
+        .select('_id roomId checkIn checkOut')
+        .sort({ checkIn: 1 });
+      const activeBookingIds = activeBookings.map((booking) => booking._id);
+      await RoomNight.deleteMany({ bookingId: { $nin: activeBookingIds } });
+      const lockByNight = new Map();
+      activeBookings.forEach((booking) => {
+        const nights = Math.round((booking.checkOut - booking.checkIn) / 86_400_000);
+        if (nights <= 0) return;
+        buildNightKeys(booking.checkIn, nights).forEach((night) => {
+          const key = `${booking.roomId}:${night}`;
+          if (!lockByNight.has(key)) lockByNight.set(key, { roomId: booking.roomId, night, bookingId: booking._id });
+        });
+      });
+      const lockOperations = [...lockByNight.values()].map(({ roomId, night, bookingId }) => ({
+        updateOne: {
+          filter: { roomId, night },
+          update: { $setOnInsert: { bookingId } },
+          upsert: true
+        }
+      }));
+      if (lockOperations.length) {
+        try {
+          await RoomNight.bulkWrite(lockOperations, { ordered: false });
+        } catch (error) {
+          if (error.code !== 11000 && !error.writeErrors?.every((writeError) => writeError.code === 11000)) throw error;
+        }
+      }
+    })().catch((error) => {
+      databaseReady = undefined;
+      throw error;
+    });
+  }
+  return databaseReady;
+};
+
+app.use('/api', async (_req, _res, next) => {
+  try {
+    await initializeDatabase();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 // 3. API Mount points
 app.use('/api/rooms', roomRoutes);
@@ -115,37 +172,20 @@ app.use((err, req, res, _next) => {
   });
 });
 
-// 5. Connect before listening so requests never hit an uninitialized database.
-const startServer = async () => {
-  await connectDB();
-  await RoomNight.init();
-  const activeBookings = await Booking.find({ status: { $ne: 'Cancelled' } }).select('_id roomId checkIn checkOut').sort({ checkIn: 1 });
-  const activeBookingIds = activeBookings.map((booking) => booking._id);
-  await RoomNight.deleteMany({ bookingId: { $nin: activeBookingIds } });
-  const lockByNight = new Map();
-  activeBookings.forEach((booking) => {
-    const nights = Math.round((booking.checkOut - booking.checkIn) / 86_400_000);
-    if (nights <= 0) return;
-    buildNightKeys(booking.checkIn, nights).forEach((night) => {
-      const key = `${booking.roomId}:${night}`;
-      if (!lockByNight.has(key)) lockByNight.set(key, { roomId: booking.roomId, night, bookingId: booking._id });
+// Vercel invokes the exported app as a function. Locally, keep the direct listener.
+if (!process.env.VERCEL) {
+  const startServer = async () => {
+    await initializeDatabase();
+    app.listen(PORT, () => {
+      console.log(`👑 Royal Talassa Server running on: http://localhost:${PORT}`);
+      console.log(`📡 Health status details: http://localhost:${PORT}/api/status`);
     });
-  });
-  const lockOperations = [...lockByNight.values()].map(({ roomId, night, bookingId }) => ({
-      updateOne: {
-        filter: { roomId, night },
-        update: { $setOnInsert: { bookingId } },
-        upsert: true
-      }
-    }));
-  if (lockOperations.length) await RoomNight.bulkWrite(lockOperations, { ordered: false });
-  app.listen(PORT, () => {
-    console.log(`👑 Royal Talassa Server running on: http://localhost:${PORT}`);
-    console.log(`📡 Health status details: http://localhost:${PORT}/api/status`);
-  });
-};
+  };
 
-startServer().catch((error) => {
-  console.error('Could not start the API server:', error.message);
-  process.exitCode = 1;
-});
+  startServer().catch((error) => {
+    console.error('Could not start the API server:', error.message);
+    process.exitCode = 1;
+  });
+}
+
+export default app;

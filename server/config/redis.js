@@ -7,7 +7,9 @@ const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 let redisClient = null;
 let isRedisConnected = false;
 
-try {
+if (process.env.VERCEL) {
+  console.log('ℹ️ Redis cache is disabled for this Vercel deployment.');
+} else try {
   redisClient = createClient({
     url: redisUrl
   });

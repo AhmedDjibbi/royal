@@ -3,25 +3,27 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/royal-talassa';
+const mongoURI = process.env.MONGODB_URI || (process.env.VERCEL ? '' : 'mongodb://localhost:27017/royal-talassa');
+let connectionPromise;
 
 const connectDB = async () => {
-  let retries = 5;
-  while (retries > 0) {
-    try {
-      const conn = await mongoose.connect(mongoURI);
-      console.log(`🏛️  MongoDB Database Connected: ${conn.connection.host}`);
-      break;
-    } catch (error) {
-      console.error(`Error connecting to MongoDB (attempts left: ${retries}): ${error.message}`);
-      retries -= 1;
-      if (retries === 0) {
-        process.exit(1); // Exit server process on critical DB connect failure
-      }
-      console.log('Waiting 3 seconds before next connection attempt...');
-      await new Promise(res => setTimeout(res, 3000));
-    }
+  if (!mongoURI) throw new Error('MONGODB_URI must be configured.');
+  if (mongoose.connection.readyState === 1) return mongoose.connection;
+
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 10000,
+      maxPoolSize: Number(process.env.MONGODB_MAX_POOL_SIZE || (process.env.VERCEL ? 5 : 20))
+    }).then((connection) => {
+      console.log(`🏛️  MongoDB Database Connected: ${connection.connection.host}`);
+      return connection.connection;
+    }).catch((error) => {
+      connectionPromise = undefined;
+      throw error;
+    });
   }
+
+  return connectionPromise;
 };
 
 export default connectDB;
