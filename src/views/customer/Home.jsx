@@ -42,9 +42,9 @@ export const Home = ({ setActiveView }) => {
             </button>
           </div>
           </div>
-          <div className="hero-location"><MapPin size={14} /> SKANES COAST · MONASTIR, TUNISIA</div>
-          <div className="hero-scroll"><span>Scroll to discover</span><ArrowDown size={14} /></div>
         </div>
+        <div className="hero-location"><MapPin size={14} /> SKANES COAST · MONASTIR, TUNISIA</div>
+        <div className="hero-scroll"><span>Scroll to discover</span><ArrowDown size={14} /></div>
       </section>
 
       <section className="home-content">
