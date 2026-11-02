@@ -1,0 +1,453 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" >
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="identifier-url" content="https://www.thalassa-hotels.com/" />
+<meta http-equiv="content-language" content="FR" />
+<title>Thalassa HÃ´tels |SÃ©jour de luxe Thalasso & spa</title>
+<meta name="description" content="La chaÃ®ne Thlassa Hotels comporte un total de 1000 chambres rÃ©parties sur trois unitÃ©s Ã  Monastir, Mahdia et sousse, vue de mer. Le royal Thalassa Monastir est considÃ©rÃ© comme le meilleur 5 Ã©toiles du sahel. La particularitÃ© de thalassa Hotels est de s'adresser Ã  toutes les cibles, aussi bien balnÃ©aire, Thalasso, Corporate que sportive. " />
+<meta name="keywords" content="SÃ©jour Tunisie, SÃ©jour Monastir Tunisie, SÃ©jour Sousse Tunisie, SÃ©jour Mahdia Tunisie, RÃ©server hÃ´tel Monastir Tunisie, weekend thalasso voyage Tunisie tout compris, Thalasso Tunisie all inclusive, Hotel-spa Sousse Tunisie, SÃ©jour Sousse pas cher, SÃ©jour Mahdia pas cher, SÃ©jour Thalasso Mahdia, Hotel 5 Ã©toiles, Hotel luxe Tunisie vue de mer, Hotel bien-Ãªtre Tunisie" />
+<link rel="image_src" href="" />
+<meta name="author" content="Same Team e-business solutions" />
+<meta name="copyright" content="Thalassa Hotels" />
+<link href="https://www.thalassa-hotels.com/images/favicon.png" type="image/png" rel="icon" />
+
+<link rel="shortcut icon" type="image/X-ICON" href="https://www.thalassa-hotels.com/images/favicon.ico" />
+
+<link rel="icon" type="image/png" href="https://www.thalassa-hotels.com/images/favicon.png" />
+<link href="https://www.thalassa-hotels.com/styles/master.css" rel="stylesheet" type="text/css" media="screen" />
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/scripts.js"></script>
+
+
+
+
+<!--[if IE 7]>
+<link href="https://www.thalassa-hotels.com/styles/iefix.css" rel="stylesheet" type="text/css" media="screen" />
+<![endif]-->
+
+
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/swfobject.js"></script>
+
+
+
+
+
+
+<!--<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/jcaroussel/jquery.jcarousel.min.js"></script>-->
+
+	<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/core.js"></script> 
+	<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/jquery.js"></script>
+
+
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/fancybox/jquery.easing-1.3.pack.js"></script>
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/fancybox/jquery.fancybox-1.3.1.pack.js"></script>
+<link rel="stylesheet" href="https://www.thalassa-hotels.com/scripts/fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="screen" />
+
+
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/jcaroussel/jquery.jcarousel.min.js"></script>
+<link href="https://www.thalassa-hotels.com/scripts/jcaroussel/skin.css" rel="stylesheet" type="text/css" media="screen" /> 
+
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/pixastic-lib.latest/pixastic.jquery.js"></script>
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/pixastic-lib.latest/pixastic.core.js"></script>
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/pixastic-lib.latest/actions/desaturate.js"></script>
+<script type="text/javascript">
+function resetDemo(id) {
+	//alert(id);
+	Pixastic.revert(document.getElementById(id));
+}
+</script>
+
+
+
+<script type="text/javascript" src="https://www.thalassa-hotels.com/scripts/galleria/galleria-1.2.8.min.js"></script>
+<script>
+		
+$(document).ready(function(){
+
+	//Hide (Collapse) the toggle containers on load
+	
+	$("#liste_site").hide(); 
+
+	//Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+
+	
+
+	
+	$("div#liste_groupe").hover(function(){
+		
+		$("#liste_site").slideToggle("fast");
+		return false; //Prevent the browser jump to the link anchor
+	});
+	
+
+
+	
+
+});
+
+
+
+</script>
+
+<script>
+		
+$(document).ready(function(){
+
+	
+	
+	
+	/***push galerie***/
+	$("#entete_push_galerie a").click(function() {
+
+		$("#entete_push_galerie a").removeClass("onglet_actif"); //Remove any "active" class
+		$(this).addClass("onglet_actif"); //Add "active" class to selected tab
+		return false;
+	});
+	
+	$("a#onglet_video").click(function(){
+		
+		$("#content_push_photo").hide();
+		$("#content_push_video").show(); 
+		
+		//return false; //Prevent the browser jump to the link anchor
+	});
+	
+		$("a#onglet_photo").click(function(){
+		
+		$("#content_push_video").hide();
+		$("#content_push_photo").show(); 
+		
+		//return false; //Prevent the browser jump to the link anchor
+	});
+
+	
+	
+
+});
+
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+
+
+$(document).ready(function() {
+
+	$(".link_galerie a").fancybox({
+		'overlayOpacity' : 0.9,							 
+		'titleShow'		:	false,
+		'overlayColor'	:	'#000000',
+		'scrolling' : 'no',
+		'autoScale' : false,
+	'type': 'iframe',
+	'width' : 800,
+	'height' : 600,
+	 'hideOnContentClick': false
+	});
+	
+});
+</script>
+<script>
+		
+		
+$(document).ready(function(){
+
+
+
+
+
+
+	$("#box-apercu").hide(); 
+
+
+
+	//Switch the "Open" and "Close" state per click then slide up/down (depending on open/close state)
+	$("a.btn-apercu").click(function(){
+	
+		$("#btn-apercu").toggleClass("actived");
+		$("#btn-apercu2").toggleClass("actived");
+		
+		$("#box-apercu").slideToggle("fast");
+		
+		return false; //Prevent the browser jump to the link anchor
+	});
+	});
+</script>
+
+
+</head>
+
+
+<body>
+
+<!--header-->
+<div id="super_container_header_home">
+<div id="container_header">
+<div id="header">
+<div class="logo">
+
+<a href="https://www.thalassa-hotels.com/">
+<img src="https://www.thalassa-hotels.com/images/logo_thalassa_hotels.gif" alt="Advancia IT System" /></a></div>
+
+	<div class="top">
+        <div id="liste_groupe">
+
+<ul id="liste_site"><li><a href="http://www.thalassa-hotels.com/?id_article=320" target="_self">FranÃ§ais</a></li><li><a href="http://www.thalassa-hotels.com/site/en/index.php?id_article=321" target="_self">English</a></li></ul> 
+
+<a href="#" class="show_liste">Langues</a>
+</div> 
+        
+    <div class="links"><ul><li><a href="http://www.thalassa-hotels.com/index.php?id_article=26" target="_self"  >Accueil</a></li><li><a href="http://www.thalassa-hotels.com/site/fr/contact.php?id_article=24" target="_self"  >Contactez-nous</a></li><li><a href="http://www.thalassa-hotels.com/site/fr/plan.php?id_article=25" target="_self"  >Plan du site</a></li></ul></div>    
+  </div>
+
+  </div>
+</div>
+</div>
+<div id="bandeau_container_home"><div id="bandeau"><div style="display: block;" id="featured-carousel">
+
+<ul class="carousel-items" style="margin:0 auto;">
+
+<li style="background-image:url(https://www.thalassa-hotels.com/images/banniere/170.jpg)"><a class="item-wrap"  href="http://www.thalassa-hotels.com/site/en/article.php?id_article=193"><div class="description"><h1>5 star hotel</h1> <span><b>monastir</b>Royal Thalassa</span></div></a></li><li class="active" style="background-image:url(https://www.thalassa-hotels.com/images/banniere/96.jpg)"><a class="item-wrap"  href="http://www.thalassa-hotels.com/site/fr/article.php?id_article=32"><div class="description"><h1>HÃ´tel 4 Ã©toiles</h1> <span> <b>mahdia</b>Thalassa mahdia</span></div></a></li><li style="background-image:url(https://www.thalassa-hotels.com/images/banniere/46.jpg)"><a class="item-wrap" href="#"><div class="description"><h1>HÃ´tel 4 Ã©toiles</h1> <span> <b>Thalassa</b>Sousse&nbsp;</span></div></a></li></ul>
+
+<div class="carousel-pagination">
+
+		<div class="wrap">
+
+			<ul><li><a href="#" title="Slide 0">Slide 0</a></li><li><a href="#"class="active"  title="Slide 1">Slide 1</a></li><li><a href="#" title="Slide 2">Slide 2</a></li></ul></div></div><div class="caroussel-arrows"><a href="#" class="next-carousel"></a><a href="#" class="prev-carousel"></a></div>
+
+
+</div>
+</div></div>
+
+  <div class="container_menu_principal"><div class="menu_principal">
+<div id="menu" class="menu1"><dl><dt  class="actif"><a href="http://www.thalassa-hotels.com/index.php?id_article=26" target="_self">Accueil</a></dt></dl></div>
+</div></div>
+  
+  <!--fin header-->
+
+
+<div id="container_content_index">
+
+<div id="colonne_right_index"><SCRIPT src="https://www.thalassa-hotels.com/scripts/calendar/MiscUtils.js"></SCRIPT>
+<SCRIPT src="https://www.thalassa-hotels.com/scripts/calendar/Hotel_Date.js"></SCRIPT>
+
+
+<div id="moteur_reservation">
+<div class="titre_moteur_reservation">Réservez Maintenant</div>
+
+
+<form name="Form1" method="post" action="" onSubmit="return SearchProduct('1')" id="resa_home">
+<div class="form_moteur_reservation">
+    <div class="styled-select select-theme">
+    <select name="ddl_ListHotels" id="ddl_ListHotels">
+    <option value="0"  selected="selected" >Choisir un Hôtel</option><option value="901" >Royal Thalassa Monastir</option><option value="902" >Thalassa Mahdia</option><option value="903" >Thalassa Sousse</option>    </select>
+    </div>
+
+   <!-- <div class="styled-select select-theme">
+    <select name="select" id="ddl_ListVilles">
+    
+    <option value="0"  selected="selected" >Choisir une Ville</option><option value="188" >Mahdia</option><option value="186" >Monastir</option><option value="189" >Sousse</option>    </select>
+    </div>-->
+
+    <div class="date_moteur date_arrivee">
+    Date d'arrivée    <input class="field_moteur" id="TextBox_ArrivalDate" name="dc1" value="05/06/2026" size="10" onBlur="SynchronizeByArrivalDate();EnableValidator('CompareValidator_Dates');" onFocus="DisableValidator('CompareValidator_Dates');SynchronizeByArrivalDate();" readonly> 
+    <a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.Form1.dc1);return false;" ><img class="PopcalTrigger" align="absmiddle" src="https://www.thalassa-hotels.com/scripts/calendar/calbtn.gif" width="30" height="19" border="0" alt=""></a>
+    </div>
+
+
+
+    <div class="date_moteur">
+   Date de départ    <input class="field_moteur" name="dc2" id="TextBox_DepartureDate" value="06/06/2026" size="10"  onblur="DisableValidator('CompareValidator_Dates');SynchronizeByDepartureDate();EnableValidator('CompareValidator_Dates');" onFocus="DisableValidator('CompareValidator_Dates');SynchronizeByDepartureDate();EnableValidator('CompareValidator_Dates');" readonly>
+    <a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.Form1.dc2);return false;" ><img class="PopcalTrigger" align="absmiddle" src="https://www.thalassa-hotels.com/scripts/calendar/calbtn.gif" width="30" height="19" border="0" alt=""></a>
+    
+    <INPUT name="Textbox_OvernightPeriods" class="field_moteur" id="Textbox_OvernightPeriods" 
+                            onfocus="DisableValidator('CompareValidator_Dates');SynchronizeByDuration();EnableValidator('CompareValidator_Dates');" 
+                            onblur="DisableValidator('CompareValidator_Dates');SynchronizeByDuration();EnableValidator('CompareValidator_Dates');" value="1" type="hidden">
+    </div>
+
+
+    <div class="key_moteur">
+    Mot clé    <input class="field_moteur" name="TextBox_MotCle" type="text" id="TextBox_MotCle"  />
+    </div>
+
+
+    <input name="" type="submit" value="Recherche d’hôtel" class="bouton_moteur" /> 
+
+</div>
+
+
+
+<SCRIPT language=javascript type=text/javascript>
+			var objArrivalDate	 = document.getElementById('TextBox_ArrivalDate');
+			var objDepartureDate = document.getElementById('TextBox_DepartureDate');
+			var objDuration		 = document.getElementById('Textbox_OvernightPeriods');
+</SCRIPT>
+
+</form>
+</div>
+<iframe width=132 height=142 name="gToday:contrast:agenda.js" id="gToday:contrast:agenda.js" src="https://www.thalassa-hotels.com/scripts/calendar/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+</iframe>
+
+</div>
+
+<div id="colonne_left_index">
+<ul class="articles_home"><li><a href="http://www.thalassa-hotels.com/site/fr/article.php?id_article=27"><img src="https://www.thalassa-hotels.com/images/images_article/2_max.jpg" alt="Royal Thalassa Monastir *****" id="photo_hotel1"  /><span>Royal Thalassa Monastir *****</span></a></li><li><a href="http://www.thalassa-hotels.com/site/fr/article.php?id_article=32"><img src="https://www.thalassa-hotels.com/images/images_article/3_max.jpg" alt="Thalassa Mahdia ****" id="photo_hotel2"  /><span>Thalassa Mahdia ****</span></a></li><li><a href="http://www.thalassa-hotels.com/site/fr/article.php?id_article=58"><img src="https://www.thalassa-hotels.com/images/images_article/4_max.jpg" alt="Thalassa Sousse Resort & Aquapark ****" id="photo_hotel3"  /><span>Thalassa Sousse Resort & Aquapark ****</span></a></li></ul>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- footer -->
+
+
+
+<!--fin footer-->
+  <div id="footer">
+    <div class="footertop">
+      <div id="menu_social"> </div>
+      <div class="newsletter"><span>Newsletter</span>
+        <form id="form_newsletter"  onsubmit="return Verifmail(this);" name="mailing" method="post">
+        <input name="email_newsletter" type="text" id="field_newsletter" value="Votre e-mail ici"  onfocus="this.value=''" class="input" />
+           <input name="id_article" type="hidden" value="103" />
+          <input name="btn-news" type="submit"  class="btnnews" value="" />
+        </form>
+        
+        
+        <div id="hidden_clicker" style="display:none;">
+<a class="overlay-flash" id="hiddenclicker" href="#" >Hidden Clicker</a>
+</div>
+<script>
+// Register all links with-flash as fancybox's
+	$(document).ready(function() {
+	 $("a.overlay-flash").fancybox({
+	 'padding': 0,
+	 'overlayColor' : '#000',
+	 'overlayOpacity': 0.8,
+	 'width': 530,
+	 'height': 160,
+	 'type': 'iframe',
+	 'hideOnContentClick': false
+	 });
+	});
+	 
+	// This function allows you to call the fancy box from javascript
+	// origional source: http://outburst.jloop.com/2009/08/06/call-fancybox-from-flash/
+	function callBoxFancy(my_href) {
+	var j1 = document.getElementById("hiddenclicker");
+	j1.href = my_href;
+	$('#hiddenclicker').trigger('click');
+	}
+	 
+function Verifmail(formulaire)
+{
+	//alert(formulaire.email_newsletter.value);
+	if(VerificationEmail(formulaire.email_newsletter) == false)
+
+		{
+		alert('Adresse e-mail invalide!!');
+        formulaire.email_newsletter.focus();
+		return false;		
+		}
+		else 
+		{
+			
+			//alert('mmlkmlk');
+			callBoxFancy('https://www.thalassa-hotels.com/site/fr/newsletter.php?email_newsletter='+formulaire.email_newsletter.value);
+			return false;	
+		}
+}
+</script> 
+        
+        
+        
+        
+      </div>
+       <p style="float:left; width:100%;">
+       <br />
+
+        En Tunisie, le Groupe Thalassa Hotels vous propose des séjours de luxe à Monastir, Mahdia ou Sousse. Des séjours Thalasso à des prix tout doux vous permettent de vivre des moments inoubliables de spa, de thalasso et de bien-être dans un environnement magnifique. Vous pouvez réserver en ligne votre weekend Thalasso tout compris. 
+      
+      </p>
+    </div>
+    
+    
+    
+    <div class="footlinks">
+      <div class="menu_footer1"> <ul><li><a href="http://www.royalelyssa.com/?id_article=13" target="_blank" >Royal Elyssa Spa</a></li>
+		<li>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="http://www.thalassa-hotels.com/site/fr/news.php?id_article=14" target="_self" >ActualitÃ©s</a></li>
+		<li>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="http://www.thalassa-hotels.com/site/fr/news.php?categorie_news=6&amp;id_article=15" target="_self" >Presse</a></li>
+		</ul></div>
+      <div class="menu_footer2"><ul id="menu_footer2"><li><a href="http://www.thalassa-hotels.com/index.php?id_article=1" target="_self" >Thalassa Hotels</a></li>
+		<li>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="http://www.thalassa-hotels.com/site/fr/contact.php?id_article=24" target="_self" >Contactez-nous</a></li>
+		<li>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="http://www.thalassa-hotels.com/site/fr/plan.php?id_article=25" target="_self" >Plan du site</a></li>
+		</ul></div>
+      <div class="copyright">Copyright ©  Thalassa Hotels  - 2026 - All rights reserved -  
+      
+      <span class="sameteam">Powered by 
+		  <a href="http://www.sameteam.com.tn" target="_blank" class="link_same">SAME <span class="team">TEAM</span></a> &amp; <a href="http://www.cyberesa.net" target="_blank" class="link_cyberesa">CYBERESA</a></span>
+      </div>
+      
+     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+function demo(id) {
+	//alert(id);
+	Pixastic.process(document.getElementById(id), "desaturate");
+}
+</script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-9418652-37");
+pageTracker._initData();
+pageTracker._trackPageview('accueil'); 
+</script> 
+<!-- fin footer-->
+
+
+
+
+</body>
+
