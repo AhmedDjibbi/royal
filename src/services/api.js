@@ -18,9 +18,17 @@ const request = async (path, options = {}) => {
 
   try {
     const response = await fetch(url, config);
-    const result = await response.json();
+    const raw = await response.text();
+    let result = {};
+    if (raw) {
+      try {
+        result = JSON.parse(raw);
+      } catch {
+        result = { message: `Request failed (${response.status} ${response.statusText}).` };
+      }
+    }
     if (!response.ok) {
-      if (response.status === 401 && !['/auth/login', '/auth/register'].includes(path)) {
+      if (response.status === 401 && !['/auth/login', '/auth/guest'].includes(path)) {
         sessionStorage.removeItem('rt_token');
         window.dispatchEvent(new Event('rt:unauthorized'));
       }
@@ -36,8 +44,8 @@ const request = async (path, options = {}) => {
 // Expose individual backend action calls
 export const api = {
   // Accounts
+  guestAccess: (details) => request('/auth/guest', { method: 'POST', body: JSON.stringify(details) }),
   login: (credentials) => request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
-  register: (details) => request('/auth/register', { method: 'POST', body: JSON.stringify(details) }),
   currentUser: () => request('/auth/me'),
   // Rooms
   getRooms: () => request('/rooms'),

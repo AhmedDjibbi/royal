@@ -54,6 +54,10 @@ if (!process.env.VERCEL) {
   app.use(cors({
     origin(origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      // Vite may choose any local port; allow loopback origins during development.
+      if (process.env.NODE_ENV !== 'production' && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+        return callback(null, true);
+      }
       return callback(new Error('Origin is not allowed by CORS.'));
     }
   }));
@@ -64,7 +68,7 @@ app.use(express.urlencoded({ extended: true, limit: '32kb' }));
 app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 180, standardHeaders: 'draft-8', legacyHeaders: false }));
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 12, standardHeaders: 'draft-8', legacyHeaders: false });
 app.use('/api/auth/login', authLimiter);
-app.use('/api/auth/register', authLimiter);
+app.use('/api/auth/guest', authLimiter);
 
 let databaseReady;
 const initializeDatabase = () => {

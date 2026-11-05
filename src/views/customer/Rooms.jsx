@@ -93,7 +93,7 @@ export const Rooms = ({ onRequireAuth }) => {
     try {
       const totalAmount = calculateTotal(selectedRoom);
       if (!user) {
-        setBookingError('Sign in or create a guest account before reserving.');
+        setBookingError('Sign in with your name and room number before reserving.');
         onRequireAuth();
         return;
       }

@@ -77,8 +77,9 @@ export const getReclamations = async (req, res) => {
 export const addReclamation = async (req, res) => {
   try {
     const { roomNumber, category, urgency, description } = req.body;
+    const guestRoom = req.user.roomNumber || roomNumber;
 
-    if (!roomNumber || !category || !urgency || !description) {
+    if (!guestRoom || !category || !urgency || !description) {
       return res.status(400).json({ message: 'Missing complaint ticket parameters.' });
     }
     if (!['Maintenance', 'Housekeeping', 'Rooms', 'Dining', 'Other'].includes(category)
@@ -90,7 +91,7 @@ export const addReclamation = async (req, res) => {
     const newTicket = new Reclamation({
       guestName: req.user.name,
       userId: req.user._id,
-      roomNumber: req.user.roomNumber || roomNumber || 'Guest',
+      roomNumber: guestRoom,
       category,
       urgency,
       description

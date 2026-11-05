@@ -24,7 +24,7 @@ export const requireAuth = async (req, res, next) => {
       issuer: 'royal-talassa-api',
       audience: 'royal-talassa-client'
     });
-    const user = await User.findById(payload.sub).select('_id name email role');
+    const user = await User.findById(payload.sub).select('_id name username roomNumber email role');
     if (!user) return res.status(401).json({ message: 'Your session is no longer valid. Please sign in again.' });
 
     req.user = user;

@@ -21,14 +21,13 @@ import { useHotel } from '../../context/HotelContext.jsx';
 
 const guestNavigation = [
   { view: 'home', label: 'The resort', icon: Compass },
-  { view: 'rooms', label: 'Stay', icon: BedDouble },
   { view: 'dining', label: 'Dining', icon: UtensilsCrossed },
-  { view: 'activities', label: 'Experiences', icon: Sparkles }
+  { view: 'activities', label: 'Experiences', icon: Sparkles },
+  { view: 'feedback', label: 'Feedback', icon: MessageCircle }
 ];
 
 const guestAccountNavigation = [
   { view: 'my-stay', label: 'My stay', icon: CalendarDays },
-  { view: 'feedback', label: 'Guest care', icon: MessageCircle },
   { view: 'referral', label: 'Rewards', icon: Gift }
 ];
 
@@ -122,7 +121,7 @@ export const Header = ({ activeView, setActiveView }) => {
             {isOfflineMode ? <span className="sync-dot" /> : <RefreshCw size={15} />}
           </button>
 
-          {!user && (
+          {user?.role !== 'admin' && (
             <button type="button" className="resort-reserve-button" onClick={() => goTo('rooms')}>
               <span>Reserve</span><CalendarDays size={15} />
             </button>
@@ -152,12 +151,12 @@ export const Header = ({ activeView, setActiveView }) => {
           <nav id="resort-mobile-navigation" className="resort-mobile-nav" aria-label="Mobile navigation">
             <div className="mobile-nav-heading">
               <span>{user?.role === 'admin' ? 'HOTEL OPERATIONS' : 'YOUR MEDITERRANEAN ESCAPE'}</span>
-              {user && <small>{user.name} · {user.role === 'admin' ? 'Administrator' : 'Guest'}</small>}
+              {user && <small>{user.name}{user.roomNumber ? ` · Room ${user.roomNumber}` : ''} · {user.role === 'admin' ? 'Administrator' : 'Guest'}</small>}
             </div>
             <div className="mobile-nav-links">
               {navigation.map((item) => renderNavigationItem(item, true))}
             </div>
-            {!user && <button type="button" className="mobile-reserve-button" onClick={() => goTo('rooms')}>Explore your stay <CalendarDays size={16} /></button>}
+            {user?.role !== 'admin' && <button type="button" className="mobile-reserve-button" onClick={() => goTo('rooms')}>Explore your stay <CalendarDays size={16} /></button>}
             <div className="mobile-nav-footer">
               <span><span className={`sync-dot${isOfflineMode ? ' is-preview' : ' is-connected'}`} />{isOfflineMode ? 'Preview data' : 'Resort data connected'}</span>
               {!isOfflineMode && <button type="button" onClick={refresh}><RefreshCw size={14} /> Refresh</button>}

@@ -3,7 +3,7 @@ import { useHotel } from '../../context/HotelContext.jsx';
 import { useUser } from '../../context/UserContext.jsx';
 import { Star, AlertTriangle, Clock, Heart } from 'lucide-react';
 
-export const Feedback = () => {
+export const Feedback = ({ onRequireAuth }) => {
   const { reviews, reclamations, addReview, addReclamation, loading } = useHotel();
   const { user } = useUser();
 
@@ -23,6 +23,10 @@ export const Feedback = () => {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      onRequireAuth?.();
+      return;
+    }
     if (!reviewComment) return;
 
     try {
@@ -38,10 +42,14 @@ export const Feedback = () => {
 
   const handleClaimSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      onRequireAuth?.();
+      return;
+    }
     if (!claimDesc) return;
 
     try {
-      await addReclamation(user.name, user.roomNumber || 'Suite 304', claimCategory, claimUrgency, claimDesc);
+      await addReclamation(user.name, user.roomNumber ?? 'Guest', claimCategory, claimUrgency, claimDesc);
       setClaimSuccess(true);
       setClaimDesc('');
       setTimeout(() => setClaimSuccess(false), 4000);
@@ -59,7 +67,7 @@ export const Feedback = () => {
   }
 
   // Filter complaints logged by the currently logged-in guest to make it personal
-  const myClaims = reclamations.filter(c => c.guestName === user.name);
+  const myClaims = user ? reclamations.filter(c => c.guestName === user.name) : [];
 
   return (
     <div className="max-w-7xl mx-auto px-8 py-12 animate-fade-in">
@@ -154,6 +162,12 @@ export const Feedback = () => {
                 ></textarea>
               </div>
 
+              {!user && (
+                <div className="bg-brand/10 border border-brand/20 p-3 rounded-md text-brand text-xs">
+                  Sign in with your name and room number to publish your feedback.
+                </div>
+              )}
+
               {reviewSuccess && (
                 <div className="bg-success/10 border border-success/20 p-3 rounded-md text-success text-xs flex items-center gap-2">
                   <Heart size={14} className="shrink-0" /> Review posted successfully! Thank you for sharing.
@@ -164,7 +178,7 @@ export const Feedback = () => {
                 type="submit" 
                 className="w-full py-3 bg-brand hover:bg-brand-hover text-[#0A0E17] font-bold text-sm rounded-md transition-all duration-300 cursor-pointer border-none shadow-[0_10px_20px_rgba(225,173,36,0.2)]"
               >
-                Publish Review
+                {user ? 'Publish Review' : 'Sign in to publish'}
               </button>
             </form>
           </div>
@@ -262,6 +276,12 @@ export const Feedback = () => {
                 ></textarea>
               </div>
 
+              {!user && (
+                <div className="bg-brand/10 border border-brand/20 p-3 rounded-md text-brand text-xs">
+                  Sign in with your name and room number to lodge a private ticket.
+                </div>
+              )}
+
               {claimSuccess && (
                 <div className="bg-warning/10 border border-warning/20 p-3 rounded-md text-amber-400 text-xs flex items-center gap-2">
                   <AlertTriangle size={14} className="shrink-0" /> Ticket registered successfully. Check active queue on right panel.
@@ -272,7 +292,7 @@ export const Feedback = () => {
                 type="submit" 
                 className="w-full py-3 bg-brand hover:bg-brand-hover text-[#0A0E17] font-bold text-sm rounded-md transition-all duration-300 cursor-pointer border-none shadow-[0_10px_20px_rgba(225,173,36,0.2)]"
               >
-                Log Complaint Ticket
+                {user ? 'Log Complaint Ticket' : 'Sign in to log a ticket'}
               </button>
             </form>
           </div>

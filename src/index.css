@@ -262,6 +262,7 @@ h1, h2, h3, h4, h5, h6 {
 .auth-submit:disabled, .event-publish:disabled { opacity: .6; cursor: wait; }
 .auth-error, .account-error { padding: .85rem 1rem; border: 1px solid rgba(180,60,55,.2); background: rgba(180,60,55,.07); color: #a3433d; font-size: .78rem; }
 .auth-footnote { margin-top: 1.4rem; color: #8e9992; font-size: .67rem; line-height: 1.6; }
+.auth-mode-link { border: 0; padding: 0; background: transparent; color: #9a6d36; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
 .account-page, .admin-page { min-height: 70vh; padding: clamp(2.5rem,6vw,5.5rem) max(1.25rem,calc((100vw - 1200px)/2)); background: #f5f2eb; color: #183a3e; }
 .account-heading, .admin-page-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 2.4rem; }
 .account-heading h1, .admin-page-heading h1 { color: #183a3e; font-size: clamp(2.6rem,5vw,4.2rem); margin: .6rem 0 .4rem; line-height: 1.05; }

@@ -34,14 +34,14 @@ export const UserProvider = ({ children }) => {
   };
 
   const login = async (credentials) => acceptSession(await api.login(credentials));
-  const register = async (details) => acceptSession(await api.register(details));
+  const guestAccess = async (details) => acceptSession(await api.guestAccess(details));
   const logout = () => {
     sessionStorage.removeItem('rt_token');
     setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ user, authLoading, login, register, logout }}>
+    <UserContext.Provider value={{ user, authLoading, login, guestAccess, logout }}>
       {children}
     </UserContext.Provider>
   );

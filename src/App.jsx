@@ -63,7 +63,7 @@ function AppContent() {
       case 'activities':
         return <Activities onRequireAuth={() => requireSignIn('activities')} />;
       case 'feedback':
-        return user ? <Feedback /> : <Auth onSuccess={() => setActiveView('feedback')} />;
+        return <Feedback onRequireAuth={() => requireSignIn('feedback')} />;
       case 'referral':
         return user ? <Referral /> : <Auth onSuccess={() => setActiveView('referral')} />;
       case 'my-stay':

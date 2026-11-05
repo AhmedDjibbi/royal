@@ -64,7 +64,7 @@ const sampleRooms = [
     description: "Comfortable guest room perfectly positioned to offer views of both our serene gardens and the central swimming pool.",
     price: 250,
     rating: 4.7,
-    image: "/images/room_royal_suite.jpg",
+    image: "/images/room_skanes_garden.jpg",
     maxGuests: 2,
     features: ["Garden & Pool View", "Private Balcony", "Hammam Shower", "King Bed"],
     available: true

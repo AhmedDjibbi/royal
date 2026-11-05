@@ -2,28 +2,31 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import jwt from 'jsonwebtoken';
 import { createAccessToken, requireAdmin, requireAuth } from '../middleware/auth.js';
-import { normalizeEmail, validateLogin, validateRegistration } from './authRules.js';
+import { normalizeEmail, validateGuestAccess, validateLogin } from './authRules.js';
 
 const testSecret = 'auth-test-secret-that-is-long-enough-to-sign';
 
- test('registration trims values and normalizes email', () => {
-  assert.deepEqual(validateRegistration({ name: '  Guest Name ', email: ' GUEST@Example.com ', password: 'secure-password' }), {
-    value: { name: 'Guest Name', email: 'guest@example.com', password: 'secure-password' }
+test('guest access trims the username and accepts rooms 101 to 483', () => {
+  assert.deepEqual(validateGuestAccess({ username: '  Guest Name ', roomNumber: '101' }), {
+    value: { username: 'Guest Name', roomNumber: 101 }
+  });
+  assert.deepEqual(validateGuestAccess({ username: 'Guest', roomNumber: 483 }), {
+    value: { username: 'Guest', roomNumber: 483 }
   });
 });
 
-test('registration enforces name, email, and bcrypt password byte limits', () => {
-  assert.match(validateRegistration({ name: 'A', email: 'guest@example.com', password: 'secure-password' }).error, /Name/);
-  assert.match(validateRegistration({ name: 'Guest', email: 'not-an-email', password: 'secure-password' }).error, /email/i);
-  assert.match(validateRegistration({ name: 'Guest', email: 'guest@example.com', password: 'short' }).error, /Password/);
-  assert.match(validateRegistration({ name: 'Guest', email: 'guest@example.com', password: 'x'.repeat(73) }).error, /Password/);
-  assert.match(validateRegistration({ name: 'Guest', email: 'guest@example.com', password: 'é'.repeat(37) }).error, /UTF-8 bytes/);
+test('guest access enforces the username and room number limits', () => {
+  assert.match(validateGuestAccess({ username: 'A', roomNumber: 101 }).error, /name/i);
+  assert.match(validateGuestAccess({ username: 'Guest', roomNumber: 100 }).error, /Room number/);
+  assert.match(validateGuestAccess({ username: 'Guest', roomNumber: 484 }).error, /Room number/);
+  assert.match(validateGuestAccess({ username: 'Guest', roomNumber: '10A' }).error, /Room number/);
+  assert.match(validateGuestAccess({ username: 'Guest', roomNumber: 202.5 }).error, /Room number/);
 });
 
-test('login rejects malformed credentials with a generic message', () => {
+test('administrator login rejects malformed credentials with a generic message', () => {
   assert.equal(validateLogin({ email: 'bad', password: 'secret' }).error, 'Email or password is incorrect.');
-  assert.deepEqual(validateLogin({ email: ' GUEST@Example.com ', password: 'secret' }), {
-    value: { email: 'guest@example.com', password: 'secret' }
+  assert.deepEqual(validateLogin({ email: ' ADMIN@Example.com ', password: 'secret' }), {
+    value: { email: 'admin@example.com', password: 'secret' }
   });
   assert.equal(normalizeEmail(null), '');
 });

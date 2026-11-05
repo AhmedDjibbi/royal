@@ -9,30 +9,36 @@ let isRedisConnected = false;
 
 if (process.env.VERCEL) {
   console.log('ℹ️ Redis cache is disabled for this Vercel deployment.');
-} else try {
-  redisClient = createClient({
-    url: redisUrl
-  });
+} else {
+  try {
+    redisClient = createClient({
+      url: redisUrl,
+      socket: {
+        connectTimeout: 2000,
+        // Redis is optional. Stop retrying quickly so the API can start and use MongoDB.
+        reconnectStrategy: (retries) => (retries >= 2 ? false : 250)
+      }
+    });
 
-  redisClient.on('error', (err) => {
-    console.warn('⚠️  Redis Client Connection Error:', err.message);
-    console.warn('   Application will run in fall-back mode (Direct MongoDB queries only).');
+    redisClient.on('error', (err) => {
+      if (isRedisConnected) console.warn('⚠️  Redis Client Connection Error:', err.message);
+      isRedisConnected = false;
+    });
+
+    redisClient.on('connect', () => {
+      console.log('⚡ Redis Cache Server Connected Successfully!');
+      isRedisConnected = true;
+    });
+
+    // Connect in the background: an unavailable Redis must never block API startup.
+    redisClient.connect().catch(() => {
+      isRedisConnected = false;
+      console.warn('⚠️  Redis is unavailable. The API will use direct MongoDB queries.');
+    });
+  } catch (error) {
+    console.warn('⚠️  Could not initialize Redis client:', error.message);
     isRedisConnected = false;
-  });
-
-  redisClient.on('connect', () => {
-    console.log('⚡ Redis Cache Server Connected Successfully!');
-    isRedisConnected = true;
-  });
-
-  // Self-executing connection trigger
-  await redisClient.connect().catch(() => {
-    // Graceful error logging
-    isRedisConnected = false;
-  });
-} catch (error) {
-  console.warn('⚠️  Could not initialize Redis client:', error.message);
-  isRedisConnected = false;
+  }
 }
 
 // Resilient API wrappers for redis keys
